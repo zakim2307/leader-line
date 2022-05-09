@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+.projects {
+  display: flex;
+  justify-content: space-between;
+  width: 350px;
+}
+
+.projects div {
+  display: flex;
+  flex-direction: column;
+}
+
+.projects button {
+  background-color: white;
+  color: black;
+  padding: 5px 15px;
+  border-radius: 4px;
+  font-size: 20px;
+}

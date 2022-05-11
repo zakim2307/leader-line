@@ -4,9 +4,13 @@ import LeaderLine from "react-leader-line";
 let arr = [];
 let lines = [];
 
+let temp = [["0", "1", "2", "5"], [], [], [], [], [], []];
+
 export default function Bapp() {
   const [startValue, setStartValue] = React.useState({});
   const [endValue, setEndValue] = React.useState({});
+  const startRef = React.useRef(null);
+  const endRef = React.useRef(null);
   const [starts] = React.useState([
     {
       start: "start0",
@@ -55,13 +59,24 @@ export default function Bapp() {
     },
   ]);
 
-  const addConnections = (start, end, i, j) => {
+  const addConnections = (start, end, i, j, boolValue) => {
     if (start && end) {
-      let line = new LeaderLine(
+      console.log(
         document.getElementById(start),
-        document.getElementById(end),
-        { hide: true }
+        startRef.current.children[i].id
       );
+      // rhis is not working too
+      let line = new LeaderLine(
+        startRef.current.children[i].id,
+        endRef.current.children[j].id,
+        { hide: boolValue }
+      );
+      // rhis is not working too
+      // let line = new LeaderLine(
+      //   document.getElementById(start),
+      //   document.getElementById(end),
+      //   { hide: boolValue }
+      // );
       lines[i][j] = line;
       setEndValue(null);
     }
@@ -72,7 +87,13 @@ export default function Bapp() {
       lines[i] = [];
       arr[i] = [];
       for (let j in ends) {
-        addConnections(starts[i].start, ends[j].end, i, j);
+        addConnections(
+          starts[i].start,
+          ends[j].end,
+          i,
+          j,
+          temp[i].includes(j) ? false : true
+        );
       }
     }
 
@@ -85,62 +106,8 @@ export default function Bapp() {
     };
   }, []);
 
-  //   /**
-  //    * this useEffect is for single dimensional
-  //    * MMQ type questions
-  //    */
-  //   React.useEffect(() => {
-  //     /**
-  //      * check of endValue and startValue is empty or null
-  //      */
-  //     if (
-  //       endValue !== null &&
-  //       startValue !== null &&
-  //       Object.keys(endValue).length > 0 &&
-  //       Object.keys(startValue).length > 0
-  //     ) {
-  //       /**
-  //        * hide every line visible
-  //        */
-  //       for (let i in lines[startValue.index]) {
-  //         lines[startValue.index][i].hide();
-  //       }
-  //       /**
-  //        * check if current endValue's index is
-  //        * there inside arra elements
-  //        */
-  //       if (arr[startValue.index] === endValue.index) {
-  //         /**
-  //          * remove current index element from arr
-  //          */
-  //         arr[startValue.index] = [];
-  //         /**
-  //          * hide current selected startValue index line to
-  //          * current selected endValue index line
-  //          */
-  //         lines[startValue.index][endValue.index].hide();
-  //       } else {
-  //         /**
-  //          * assign arr of current selected startValue index with
-  //          * selected endValue index
-  //          */
-  //         arr[startValue.index] = endValue.index;
-  //         /**
-  //          * show connected line from selected startValue index
-  //          * to currently selected endValue index
-  //          */
-  //         lines[startValue.index][endValue.index].show();
-  //       }
-  //       /**
-  //        * remove empty selected startValues and endValues
-  //        */
-  //       setEndValue({});
-  //       setStartValue({});
-  //     }
-  //   });
-
   /**
-   * this useEffect is for multi dimensional
+   * this useEffect is for single dimensional
    * MMQ type questions
    */
   React.useEffect(() => {
@@ -153,6 +120,12 @@ export default function Bapp() {
       Object.keys(endValue).length > 0 &&
       Object.keys(startValue).length > 0
     ) {
+      /**
+       * hide every line visible
+       */
+      for (let i in lines[startValue.index]) {
+        lines[startValue.index][i].hide();
+      }
       /**
        * check if current endValue's index is
        * there inside arra elements
@@ -172,11 +145,12 @@ export default function Bapp() {
          * assign arr of current selected startValue index with
          * selected endValue index
          */
-        arr[startValue.index].push(endValue.index);
+        arr[startValue.index] = endValue.index;
         /**
          * show connected line from selected startValue index
          * to currently selected endValue index
          */
+        console.log(lines);
         lines[startValue.index][endValue.index].show();
       }
       /**
@@ -186,6 +160,54 @@ export default function Bapp() {
       setStartValue({});
     }
   });
+
+  // /**
+  //  * this useEffect is for multi dimensional
+  //  * MMQ type questions
+  //  */
+  // React.useEffect(() => {
+  //   /**
+  //    * check of endValue and startValue is empty or null
+  //    */
+  //   if (
+  //     endValue !== null &&
+  //     startValue !== null &&
+  //     Object.keys(endValue).length > 0 &&
+  //     Object.keys(startValue).length > 0
+  //   ) {
+  //     /**
+  //      * check if current endValue's index is
+  //      * there inside arra elements
+  //      */
+  //     if (arr[startValue.index] === endValue.index) {
+  //       /**
+  //        * remove current index element from arr
+  //        */
+  //       arr[startValue.index] = [];
+  //       /**
+  //        * hide current selected startValue index line to
+  //        * current selected endValue index line
+  //        */
+  //       lines[startValue.index][endValue.index].hide();
+  //     } else {
+  //       /**
+  //        * assign arr of current selected startValue index with
+  //        * selected endValue index
+  //        */
+  //       arr[startValue.index].push(endValue.index);
+  //       /**
+  //        * show connected line from selected startValue index
+  //        * to currently selected endValue index
+  //        */
+  //       lines[startValue.index][endValue.index].show();
+  //     }
+  //     /**
+  //      * remove empty selected startValues and endValues
+  //      */
+  //     setEndValue({});
+  //     setStartValue({});
+  //   }
+  // });
 
   /**
    *
@@ -214,7 +236,7 @@ export default function Bapp() {
     <div>
       <header className='App-header'>
         <div className='projects'>
-          <div className='starts'>
+          <div className='starts' ref={startRef}>
             {starts.map((item, index) => {
               return (
                 <button
@@ -226,7 +248,7 @@ export default function Bapp() {
               );
             })}
           </div>
-          <div className='ends'>
+          <div className='ends' ref={endRef}>
             {ends.map((item, index) => {
               return (
                 <button

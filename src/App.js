@@ -1,7 +1,7 @@
 import "./App.css";
 import LeaderLine from "react-leader-line";
 import React from "react";
-import Bapp from "./Bapp";
+import NewWin from "./NewWin";
 
 let arr = [];
 
@@ -142,7 +142,7 @@ function App() {
         </header>
       ) : (
         <div>
-          <Bapp />
+          <NewWin />
         </div>
       )}
     </div>

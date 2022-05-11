@@ -6975,7 +6975,7 @@ prompts@^2.0.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.8.1:
+prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -7127,6 +7127,13 @@ react-leader-line@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/react-leader-line/-/react-leader-line-1.0.5.tgz#fc98316d862c4f6b6ace1206a6b18543acc1c629"
   integrity sha512-oSFQ8M/ByqE7VSlV4Oetze9OdDR3iyPAToeCj940ON0o72m3MPuQ0fOgKHgoJ9ggk15PSzh8zHsZHMc9hV22uw==
+
+react-new-window@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/react-new-window/-/react-new-window-0.2.1.tgz#510aa91ba0334f0d42ba499c617a37f46c4d84ba"
+  integrity sha512-3s6W8eipRbjoLGvWpFRPSt2/z5h9FTS01C+ZjaEZX7/cF6ejGc6JVuL4oEo0s73IluaqoLIDB49AK4fSMW8pJw==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-refresh@^0.11.0:
   version "0.11.0"

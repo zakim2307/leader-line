@@ -1,12 +1,11 @@
 import React from "react";
 import "./App.css";
-import LeaderLine from "react-leader-line";
 let arr = [];
 let lines = [];
 
 let temp = [["0", "1", "2", "5"], [], [], [], [], [], []];
 
-export default function Bapp() {
+export default function Bapp({ LeaderLine }) {
   const [startValue, setStartValue] = React.useState({});
   const [endValue, setEndValue] = React.useState({});
   const startRef = React.useRef(null);
@@ -61,22 +60,15 @@ export default function Bapp() {
 
   const addConnections = (start, end, i, j, boolValue) => {
     if (start && end) {
-      console.log(
-        document.getElementById(start),
-        startRef.current.children[i].id
-      );
+      console.log(startRef.current.children[i], endRef.current.children[j]);
       // rhis is not working too
       let line = new LeaderLine(
-        startRef.current.children[i].id,
-        endRef.current.children[j].id,
+        startRef.current.children[i],
+        endRef.current.children[j],
         { hide: boolValue }
       );
       // rhis is not working too
-      // let line = new LeaderLine(
-      //   document.getElementById(start),
-      //   document.getElementById(end),
-      //   { hide: boolValue }
-      // );
+
       lines[i][j] = line;
       setEndValue(null);
     }

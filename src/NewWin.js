@@ -2,7 +2,7 @@ import React from "react";
 import NewWindow from "react-new-window";
 import Bapp from "./Bapp";
 
-export default function NewWin() {
+export default function NewWin({ LeaderLine }) {
   return (
     <NewWindow
       features={{
@@ -11,7 +11,7 @@ export default function NewWin() {
         menubar: "no",
         toolbar: "no",
       }}>
-      <Bapp />
+      <Bapp LeaderLine={LeaderLine} />
     </NewWindow>
   );
 }
